@@ -2,6 +2,7 @@
 
 class Array
 {
+
 	int* numbers;
 	unsigned int size;
 
@@ -12,8 +13,11 @@ public:
 
 	//metody
 	void create(unsigned int);
+	bool check(unsigned int);
 	void remove();
 	void put_values(double);
 	void put_reversed();
 	void show();
+
+	friend class algorithms;
 };

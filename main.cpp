@@ -2,8 +2,10 @@
 #include <stdlib.h>
 #include <time.h>
 #include "array.h"
-#include "algorithms.h"
 #include "test.h"
+#include "Introsort.h"
+#include "Mergesort.h"
+#include "Quicksort.h"
 using namespace std;
 
 int main()
@@ -11,7 +13,6 @@ int main()
     srand(static_cast<unsigned int>(time(NULL)));
 
     Array arr;
-    Algorithms alg;
     Test test;
 
     double sorting_perc[7] = { 0, 0.25, 0.5, 0.75, 0.95, 0.99, 0.997 }; //stopień posortowania elementów
@@ -49,14 +50,14 @@ int main()
 
     arr.create(50); //arg: ilosc elementow
     arr.put_values(0.25); //arg: procent posortowania
+
+    quicksort(arr);
+    //introsort(arr);
+    //mergesort(arr);
+
     //arr.check(int(0.5 * 50)); //arg: ilosc elementow * procent posortowania
-
-    alg.copy(arr);
-    alg.quicksort();
-    //alg.introsort();
-    //alg.mergesort();
-
     arr.show();
+
     arr.remove();
 
     return 0;

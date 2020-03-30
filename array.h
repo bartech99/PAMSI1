@@ -8,10 +8,13 @@ class Array
 
 public:
 
-	Array(int* = nullptr, unsigned int = 0);
+	int* tab;
+
+	Array(int* = nullptr, int* = nullptr, unsigned int = 0);
 	~Array();
 
 	//metody
+	void copy();
 	void create(unsigned int);
 	bool check(unsigned int);
 	void remove();

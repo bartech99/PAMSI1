@@ -21,20 +21,22 @@ double Test::end()
 	return (final - start) / (double)CLOCKS_PER_SEC;
 }
 
-double Test::calc_average()
+void Test::print_average()
 {
-	double temp = 0.0;
+	double avg_quick = 0.0;
+	double avg_intro = 0.0;
+	double avg_merge = 0.0;
+
 	for (unsigned int i = 0; i < 100; i++)
 	{
-		temp += results[i];
+		avg_merge += merge[i];
+		avg_quick += quick[i];
+		avg_intro += intro[i];
 	}
-	return temp/100.0;
-}
-
-void Test::print(double t)
-{
 	cout.precision(5);
-	cout << "\t   Sredni czas: " << t << " [s]" << endl;
+	cout << "\t   Szybkie sortowanie: \t\t" << avg_quick << " [s]" << endl;
+	cout << "\t   Sortowanie introspektywne: \t" << avg_intro << " [s]" << endl;
+	cout << "\t   Sortowanie przez scalanie: \t" << avg_merge << " [s]" << endl;
 	cout.precision(1);
 }
 
@@ -44,10 +46,6 @@ Test::Test(clock_t s, clock_t f)
 {
 	start = s;
 	final = f;
-	for (unsigned int i = 0; i < 100; i++)
-	{
-		results[i] = 0;
-	}
 }
 
 Test::~Test() {}

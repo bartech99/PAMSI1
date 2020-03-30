@@ -10,11 +10,12 @@ public:
 	Test(clock_t = 0, clock_t = 0);
 	~Test();
 
-	double results[100];
+	double intro[100];
+	double merge[100];
+	double quick[100];
 
 	void init();
 	void begin();
 	double end();
-	double calc_average();
-	void print(double);
+	void print_average();
 };

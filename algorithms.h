@@ -1,12 +1,18 @@
 #pragma once
-#include "array.h"
-
+#include "Array.h"
 class Algorithms
 {
+	int* tab;
+	unsigned int size;
+
 public:
 
+	Algorithms(int* = nullptr, unsigned int = 0);
+	~Algorithms();
+
 	//metody
-	int quicksort(Array& a);
-	int introsort(Array& a);
-	int mergesort(Array& a);
+	void copy(Array&);
+	int quicksort();
+	int introsort();
+	int mergesort();
 };

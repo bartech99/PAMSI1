@@ -19,5 +19,5 @@ public:
 	void put_reversed();
 	void show();
 
-	friend class algorithms;
+	friend class Algorithms;
 };

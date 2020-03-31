@@ -33,10 +33,10 @@ int main()
 
                 arr.copy();
                 test.begin();
-                quicksort(arr);
+                quicksort(arr.tab, 0, sizes[it_sizes]-1);
                 test.quick[it_h] = test.end();
-                //arr.check(sizes[it_sizes]);
-
+                arr.check(sizes[it_sizes]);
+                
                 arr.copy();
                 test.begin();
                 introsort(arr);
@@ -48,7 +48,7 @@ int main()
                 mergesort(arr);
                 test.merge[it_h] = test.end();
                 //arr.check(sizes[it_sizes]);
-
+                
                 arr.remove();
             }
 
@@ -57,28 +57,30 @@ int main()
         cout << endl;
     }
     */
-    
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///Strefa testowania algorytmu
-
-    arr.create(50); //arg: ilosc elementow
-    arr.put_values(0.25); //arg: procent posortowania
+    
+    arr.create(10); //arg: ilosc elementow
+    arr.put_values(0.0); //arg: procent posortowania
     arr.copy();
 
     arr.show();
     cout << endl << endl;
 
-    //quicksort(arr);
+    cout.precision(5);
+    test.begin();
+
     //introsort(arr);
     //mergesort(arr);
+    
+    cout << "Czas: " << test.end() << " [s]" << endl;
+    cout.precision(1);
 
     arr.show();
 
-    //arr.check(50); //arg: ilosc elementow * procent posortowania
-    //arr.show();
-
     arr.remove();
-
+    
     return 0;
 }

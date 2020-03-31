@@ -87,4 +87,5 @@ void Array::show()
 		if (i % 10 == 9)
 			cout << endl << endl;
 	}
+	cout << endl;
 }

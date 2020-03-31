@@ -69,14 +69,8 @@ int main()
     arr.show();
     cout << endl << endl;
 
-    cout.precision(5);
-    test.begin();
-
     //introsort(arr);
     //mergesort(arr);
-    
-    cout << "Czas: " << test.end() << " [s]" << endl;
-    cout.precision(1);
 
     arr.show();
 

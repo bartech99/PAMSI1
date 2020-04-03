@@ -2,8 +2,6 @@
 #include <iostream>
 using namespace std;
 
-
-
 Array::Array(int* p1, int* p2, unsigned int s)
 {
 	this->numbers = p1;

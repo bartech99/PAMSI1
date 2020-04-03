@@ -33,19 +33,23 @@ void Test::print_average()
 		avg_quick += quick[i];
 		avg_intro += intro[i];
 	}
-	cout.precision(5);
-	cout << "\t   Szybkie sortowanie: \t\t" << avg_quick << " [s]" << endl;
-	cout << "\t   Sortowanie introspektywne: \t" << avg_intro << " [s]" << endl;
-	cout << "\t   Sortowanie przez scalanie: \t" << avg_merge << " [s]" << endl;
-	cout.precision(1);
+	cout << "\t   Szybkie sortowanie: \t\t" << avg_quick*1000 << " [ms]" << endl;
+	cout << "\t   Sortowanie introspektywne: \t" << avg_intro*1000 << " [ms]" << endl;
+	cout << "\t   Sortowanie przez scalanie: \t" << avg_merge*1000 << " [ms]" << endl;
 }
 
 
 
-Test::Test(clock_t s, clock_t f)
+Test::Test(clock_t s, clock_t f, int a, int b, int c)
 {
 	start = s;
 	final = f;
+	for (int i = 0; i < 100; i++)
+	{
+		merge[i] = a;
+		quick[i] = b;
+		intro[i] = c;
+	}
 }
 
 Test::~Test() {}

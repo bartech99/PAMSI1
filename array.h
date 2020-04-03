@@ -9,6 +9,7 @@ class Array
 public:
 
 	int* tab;
+	int* tab_h;
 
 	Array(int* = nullptr, int* = nullptr, unsigned int = 0);
 	~Array();
@@ -21,6 +22,4 @@ public:
 	void put_values(double);
 	void put_reversed();
 	void show();
-
-	friend class Algorithms;
 };

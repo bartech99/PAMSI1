@@ -7,7 +7,7 @@ class Test
 
 public:
 
-	Test(clock_t = 0, clock_t = 0);
+	Test(clock_t = 0, clock_t = 0, int = 0, int = 0, int = 0);
 	~Test();
 
 	double intro[100];

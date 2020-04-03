@@ -3,161 +3,145 @@
 #include <math.h>
 using namespace std;
 
-void introsort_h (int* tab, int first, int last, int depth);
-void introsort (int* tab, int size);
-int partition (int* tab, int first, int last);
-void insertion (int* tab, int size);
-void swap (int* a, int* b);
-void heap_h (int* tab, int start, int end);
-void heapsort (int* tab, int start, int end);
-bool check (int* tab, int end);
+
+
+void introsort_h(int* tab, int start, int end, int maxdepth);
+void introsort(int* tab, int start, int end);
+void insertion(int* tab, int start, int end);
+void heapsort_h(int* tab, int size, int root);
+void heapsort(int* tab, int start, int end);
+void swap_tab(int* tab, int s1, int s2);
+int partition_tab(int* tab, int start, int end);
 
 
 
-void introsort_h (int* tab, int first, int last, int depth) 
+void introsort_h(int* tab, int start, int end, int maxdepth) 
 {
-	while (last - first > 0)
-	{
-		if (depth == 0)
-		{
-			heapsort (&tab[first], first, last - first + 1);
-		}
-		else 
-		{
-			int pivot;
+    int size = end - start + 1;
 
-			if (check(tab, last))
-			{
-				break;
-			}
+    if (size <= 16) 
+    {
+        insertion(tab, start, end);
+    }
 
-			pivot = partition (tab, first, last);
-			introsort_h (tab, pivot + 1, last, depth - 1);
-			last = pivot - 1;
-		}
-	}
+    else if (maxdepth == 0) 
+    {
+        heapsort(tab, start, end);
+    }
+
+    else if (start < end) 
+    {
+        int pivot = partition_tab(tab, start, end);
+        introsort_h(tab, start, pivot, --maxdepth);
+        introsort_h(tab, pivot + 1, end, --maxdepth);
+    }
 }
 
-void introsort (int* tab, int size)
+void introsort(int* tab, int start, int end) 
 {
-	introsort_h (tab, 0, size - 1, (int(2 * log(double(size)))));
-	insertion (tab, size);
+    int maxdepth = (int)log(end - start + 1) * 2;
+    introsort_h(tab, start, end, maxdepth);
 }
 
-int partition (int* tab, int first, int last) 
+void insertion(int* tab, int start, int end) 
 {
-	int pivot;
-	int mid = (first + last) / 2;
+    end++;
+    int i = start;
 
-	pivot = tab[first] > tab[mid] ? first : mid;
+    while (i < end) 
+    {
+        int j = i;
 
-	if (tab[pivot] > tab[last])
-	{
-		pivot = last;
-	}
+        while (j > 0 && tab[j - 1] > tab[j]) 
+        {
+            swap_tab(tab, j, j - 1);
+            --j;
+        }
 
-	swap (tab[pivot], tab[first]);
-	pivot = first;
-
-	while (first < last) 
-	{
-		if (tab[first] <= tab[last])
-		{
-			swap (tab[pivot++], tab[first]);
-		}
-		++first;
-	}
-
-	swap (tab[pivot], tab[last]);
-	return pivot;
+        ++i;
+    }
 }
 
-void insertion (int* tab, int size)
+void heapsort_h(int* tab, int size, int root) 
 {
-	int i;
+    int largest = root;
+    int left = 2 * root + 1;
+    int right = 2 * root + 2;
 
-	for (i = 1; i < size; i++)
-	{
-		int j;
-		int temp = tab[i];
+    if (left < size && tab[left] > tab[largest]) 
+    {
+        largest = left;
+    }
 
-		for (j = i; j >= 1 && tab[j - 1] > temp; j--)
-		{
-			tab[j] = tab[j - 1];
-		}
+    if (right < size && tab[right] > tab[largest]) 
+    {
+        largest = right;
+    }
 
-		tab[j] = temp;
-	}
+    if (largest != root) {
+        swap_tab(tab, root, largest);
+        heapsort_h(tab, size, largest);
+    }
 }
 
-void swap (int *a, int *b) 
+void heapsort(int* tab, int start, int end) 
 {
-	int temp = *a;
-	*a = *b;
-	*b = temp;
+    ++end;
+    int* temp = new int[end - start];
+
+    for (int i = 0; i < end - start; i++) 
+    {
+        temp[i] = tab[i + start];
+    }
+
+    for (int i = (end - start) / 2 - 1; i >= 0; --i) 
+    {
+        heapsort_h(temp, (end - start), i);
+    }
+
+    for (int i = (end - start) - 1; i >= 0; --i) 
+    {
+        swap_tab(temp, 0, i);
+        heapsort_h(temp, i, 0);
+    }
+
+    for (int i = 0; i < end - start; i++) 
+    {
+        tab[i + start] = temp[i];
+    }
+
+    delete[] temp;
 }
 
-void heap_h (int* tab, int start, int end)
+void swap_tab(int* tab, int s1, int s2) 
 {
-	int temp = tab[start];
-
-	while (start <= end / 2) 
-	{
-		int k = 2 * start;
-		while (k < end && tab[k] < tab[k + 1])
-		{
-			++k;
-		}
-
-		if (temp >= tab[k])
-		{
-			break;
-		}
-
-		tab[start] = tab[k];
-		start = k;
-	}
-
-	tab[start] = temp;
+    int x = tab[s1];
+    tab[s1] = tab[s2];
+    tab[s2] = x;
 }
 
-void heapsort (int *tab, int start, int end)
+int partition_tab(int* tab, int start, int end) 
 {
-	int* temp = new int[end-start+1];
-	for (int i = 0; i < end - start; i++)
-	{
-		temp[i] = tab[start + i];
-	}
+    int pivot = tab[(end + start) / 2];
+    int i = start - 1;
+    int j = end + 1;
+    while (1) 
+    {
+        do 
+        {
+            ++i;
+        } while (tab[i] < pivot);
 
-	for (int i = (end - 1) / 2; i >= start; i--) 
-	{
-		heap_h (temp, i, end - 1);
-	}
+        do 
+        {
+            --j;
+        } while (tab[j] > pivot);
 
-	for (int i = end - 1; i > start; i--) 
-	{
-		swap (temp[i], temp[start]);
-		heap_h (temp, start, i - 1);
-	}
+        if (i >= j) 
+        {
+            return j;
+        }
 
-	for (int i = 0; i < end - start; i++)
-	{
-		tab[start + i] = temp[i];
-	}
-}
-
-bool check (int* tab, int end) 
-{
-	for (int i = 0; i < end; i++) 
-	{
-		if (tab[i] > tab[i + 1]) 
-		{
-			return false;
-		}
-		else 
-		{
-			return true;
-		}
-	}
-	return true;
+        swap_tab(tab, i, j);
+    }
 }

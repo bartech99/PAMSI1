@@ -2,45 +2,42 @@
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
+#include "Introsort.h"
 using namespace std;
 
-void quicksort(int* tab, int p, int q)
+void quicksort(int* tab, int start, int end) 
 {
-    int v = tab[(p + q) / 2];
-    int i, j, x;
-
-    i = p;
-    j = q;
-
-    do
+    if (start < end) 
     {
-        while (tab[i] < v)
-        {
-            i++;
-        }
-
-        while (tab[j] > v)
-        {
-            j--;
-        }
-
-        if (i <= j)
-        {
-            x = tab[i];
-            tab[i] = tab[j];
-            tab[j] = x;
-            i++;
-            j--;
-        }
-    } while (i <= j);
-
-    if (j > p)
-    {
-        quicksort(tab, p, j);
+        int pivot = partition_tab(tab, start, end);
+        quicksort(tab, start, pivot);
+        quicksort(tab, pivot + 1, end);
     }
+}
 
-    if (i < q)
+int rev_partition_tab(int* tab, int start, int end) 
+{
+    int pivot = tab[(end + start) / 2];
+    int i = start - 1;
+    int j = end + 1;
+
+    while (1) 
     {
-        quicksort(tab, i, q);
+        do 
+        {
+            ++i;
+        } while (tab[i] > pivot);
+
+        do 
+        {
+            --j;
+        } while (tab[j] < pivot);
+
+        if (i >= j)
+        {
+            return j;
+        }
+
+        swap_tab(tab, i, j);
     }
 }

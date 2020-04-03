@@ -9,7 +9,6 @@ class Array
 public:
 
 	int* tab;
-	int* tab_h;
 
 	Array(int* = nullptr, int* = nullptr, unsigned int = 0);
 	~Array();

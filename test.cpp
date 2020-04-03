@@ -6,6 +6,7 @@ using namespace std;
 
 void Test::init()
 {
+	srand(static_cast<unsigned int>(time(NULL)));
 	cout.setf(ios::fixed);	
 	cout.precision(1);
 }
@@ -33,9 +34,14 @@ void Test::print_average()
 		avg_quick += quick[i];
 		avg_intro += intro[i];
 	}
-	cout << "\t   Szybkie sortowanie: \t\t" << avg_quick << " [s]" << endl;
-	cout << "\t   Sortowanie introspektywne: \t" << avg_intro << " [s]" << endl;
-	cout << "\t   Sortowanie przez scalanie: \t" << avg_merge << " [s]" << endl;
+
+	avg_merge = avg_merge / 100.0;
+	avg_quick = avg_quick / 100.0;
+	avg_intro = avg_intro / 100.0;
+
+	cout << "\t   Szybkie sortowanie: \t\t" << avg_quick*1000.0 << " [ms]" << endl;
+	cout << "\t   Sortowanie introspektywne: \t" << avg_intro*1000.0 << " [ms]" << endl;
+	cout << "\t   Sortowanie przez scalanie: \t" << avg_merge*1000.0 << " [ms]" << endl;
 }
 
 

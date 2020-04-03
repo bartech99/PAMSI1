@@ -9,9 +9,7 @@ Array::Array(int* p1, int* p2, unsigned int s)
 	this->size = s;
 }
 
-Array::~Array() 
-{
-}
+Array::~Array() {}
 
 
 
@@ -47,7 +45,6 @@ void Array::remove()
 {
 	delete[] this->tab;
 	delete[] this->numbers;
-	delete[] this->tab_h;
 }
 
 void Array::put_values(double p)

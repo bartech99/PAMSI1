@@ -11,8 +11,6 @@ Array::Array(int* p1, int* p2, unsigned int s)
 
 Array::~Array() 
 {
-	this->numbers = nullptr;
-	this->tab = nullptr;
 }
 
 
@@ -49,6 +47,7 @@ void Array::remove()
 {
 	delete[] this->tab;
 	delete[] this->numbers;
+	delete[] this->tab_h;
 }
 
 void Array::put_values(double p)

@@ -40,7 +40,7 @@ int main()
                 
                 arr.copy();
                 test.begin();
-                introsort(arr.tab, sizes[it_sizes]);
+                //introsort(arr.tab, sizes[it_sizes]);
                 test.intro[it_h] = test.end();
                 //arr.check(sizes[it_sizes]);
 
@@ -64,19 +64,19 @@ int main()
         arr.copy();
         test.begin();
         quicksort(arr.tab, 0, sizes[it_sizes] - 1);
-        cout << "\t   Szybkie sortowanie: \t\t" << test.end()*1000 << " [ms]" << endl;
+        cout << "\t   Szybkie sortowanie: \t\t" << test.end() << " [s]" << endl;
         arr.check(sizes[it_sizes]);
 
         arr.copy();
         test.begin();
         introsort(arr.tab, sizes[it_sizes]);
-        cout << "\t   Sortowanie introspektywne: \t" << test.end()*1000 << " [ms]" << endl;
+        cout << "\t   Sortowanie introspektywne: \t" << test.end() << " [s]" << endl;
         arr.check(sizes[it_sizes]);
 
         arr.copy();
         test.begin();
         mergesort(arr.tab, 0, sizes[it_sizes] - 1);
-        cout << "\t   Sortowanie przez scalanie: \t" << test.end()*1000 << " [ms]" << endl << endl;
+        cout << "\t   Sortowanie przez scalanie: \t" << test.end() << " [s]" << endl << endl;
         arr.check(sizes[it_sizes]);
 
         arr.remove();
@@ -96,7 +96,7 @@ int main()
     //mergesort(arr.tab, 0, ts-1);
     //introsort(arr.tab, ts);
     //quicksort(arr.tab, 0, ts - 1);
-    cout << "\t   Sortowanie: \t" << test.end()*1000.0 << " [ms]" << endl << endl;
+    cout << "\t   Sortowanie: \t" << test.end() << " [s]" << endl << endl;
 
     //arr.show();
     arr.check(ts);

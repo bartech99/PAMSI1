@@ -93,7 +93,9 @@ int main()
     cout.precision(5);
     test.begin();
 
-    mergesort(arr.tab, 0, ts-1);
+    //mergesort(arr.tab, 0, ts-1);
+    //introsort(arr.tab, ts);
+    //quicksort(arr.tab, 0, ts - 1);
     cout << "\t   Sortowanie: \t" << test.end()*1000.0 << " [ms]" << endl << endl;
 
     //arr.show();
